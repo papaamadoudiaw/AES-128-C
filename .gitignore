@@ -1,0 +1,8 @@
+# Fichiers compilés
+*.o
+*.out
+main
+
+# Fichiers d'éditeur
+.vscode/
+*.swp
