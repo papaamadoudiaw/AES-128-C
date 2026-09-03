@@ -20,6 +20,8 @@ int main(void) {
     sub_bytes(bloc);
 
     printf("Apres SubBytes : "); afficher_bloc(bloc);
+    shift_rows(bloc);
+    printf("Apres ShiftRows : "); afficher_bloc(bloc);
 
     return 0;
 }

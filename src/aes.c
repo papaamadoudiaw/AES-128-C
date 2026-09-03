@@ -24,3 +24,28 @@ void sub_bytes(uint8_t *bloc) {
         bloc[i] = sbox[bloc[i]];
     }
 }
+void shift_rows(uint8_t *bloc) {
+    uint8_t temp;
+
+    // Ligne 1 : decalage de 1 vers la gauche
+    temp = bloc[1];
+    bloc[1] = bloc[5];
+    bloc[5] = bloc[9];
+    bloc[9] = bloc[13];
+    bloc[13] = temp;
+
+    // Ligne 2 : decalage de 2 vers la gauche (echange des paires)
+    temp = bloc[2];
+    bloc[2] = bloc[10];
+    bloc[10] = temp;
+    temp = bloc[6];
+    bloc[6] = bloc[14];
+    bloc[14] = temp;
+
+    // Ligne 3 : decalage de 3 vers la gauche (= 1 vers la droite)
+    temp = bloc[15];
+    bloc[15] = bloc[11];
+    bloc[11] = bloc[7];
+    bloc[7] = bloc[3];
+    bloc[3] = temp;
+}
