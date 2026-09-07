@@ -72,3 +72,8 @@ void mix_columns(uint8_t *bloc) {
         bloc[i + 3] = (xtime(a0) ^ a0) ^ a1 ^ a2 ^ xtime(a3);
     }
 }
+void add_round_key(uint8_t *bloc, const uint8_t *round_key) {
+    for (int i = 0; i < 16; i++) {
+        bloc[i] ^= round_key[i];
+    }
+}
