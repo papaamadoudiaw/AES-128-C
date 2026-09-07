@@ -49,3 +49,26 @@ void shift_rows(uint8_t *bloc) {
     bloc[7] = bloc[3];
     bloc[3] = temp;
 }
+static uint8_t xtime(uint8_t x) {
+    uint8_t resultat = x << 1;
+    if (x & 0x80) {
+        resultat ^= 0x1b;
+    }
+    return resultat;
+}
+
+void mix_columns(uint8_t *bloc) {
+    for (int col = 0; col < 4; col++) {
+        int i = col * 4;
+
+        uint8_t a0 = bloc[i];
+        uint8_t a1 = bloc[i + 1];
+        uint8_t a2 = bloc[i + 2];
+        uint8_t a3 = bloc[i + 3];
+
+        bloc[i]     = xtime(a0) ^ (xtime(a1) ^ a1) ^ a2 ^ a3;
+        bloc[i + 1] = a0 ^ xtime(a1) ^ (xtime(a2) ^ a2) ^ a3;
+        bloc[i + 2] = a0 ^ a1 ^ xtime(a2) ^ (xtime(a3) ^ a3);
+        bloc[i + 3] = (xtime(a0) ^ a0) ^ a1 ^ a2 ^ xtime(a3);
+    }
+}

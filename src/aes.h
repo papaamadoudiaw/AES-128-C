@@ -5,4 +5,5 @@
 
 void sub_bytes(uint8_t *bloc);
 void shift_rows(uint8_t *bloc);
+void mix_columns(uint8_t *bloc);
 #endif

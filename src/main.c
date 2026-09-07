@@ -22,6 +22,8 @@ int main(void) {
     printf("Apres SubBytes : "); afficher_bloc(bloc);
     shift_rows(bloc);
     printf("Apres ShiftRows : "); afficher_bloc(bloc);
+    mix_columns(bloc);
+    printf("Apres MixColumns: "); afficher_bloc(bloc);
 
     return 0;
 }
