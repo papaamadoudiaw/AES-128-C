@@ -122,3 +122,36 @@ void key_expansion(const uint8_t *cle, uint8_t *round_keys) {
         bytes_generes += 4;
     }
 }
+void aes128_encrypt(const uint8_t *bloc_entree, const uint8_t *cle, uint8_t *bloc_sortie) {
+    uint8_t etat[16];
+    uint8_t round_keys[176];
+
+    // Copie le bloc d'entree dans "etat", pour ne jamais modifier bloc_entree
+    for (int i = 0; i < 16; i++) {
+        etat[i] = bloc_entree[i];
+    }
+
+    // Genere les 11 sous-cles a partir de la cle principale
+    key_expansion(cle, round_keys);
+
+    // Tour initial : juste un AddRoundKey
+    add_round_key(etat, round_keys);
+
+    // 9 tours complets
+    for (int tour = 1; tour <= 9; tour++) {
+        sub_bytes(etat);
+        shift_rows(etat);
+        mix_columns(etat);
+        add_round_key(etat, round_keys + tour * 16);
+    }
+
+    // Tour final : sans MixColumns
+    sub_bytes(etat);
+    shift_rows(etat);
+    add_round_key(etat, round_keys + 10 * 16);
+
+    // Copie le resultat dans bloc_sortie
+    for (int i = 0; i < 16; i++) {
+        bloc_sortie[i] = etat[i];
+    }
+}
