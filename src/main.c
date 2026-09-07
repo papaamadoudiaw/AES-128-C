@@ -18,6 +18,13 @@ uint8_t cle[16] = {
         0x2b, 0x28, 0xab, 0x09, 0x7e, 0xae, 0xf7, 0xcf,
         0x15, 0xd2, 0x15, 0x4f, 0x16, 0xa6, 0x88, 0x3c
     };
+     uint8_t round_keys[176];
+    key_expansion(cle, round_keys);
+    printf("Les 11 sous-cles generees :\n");
+    for (int tour = 0; tour < 11; tour++) {
+        printf("Tour %2d : ", tour);
+        afficher_bloc(round_keys + tour * 16);
+    }
     printf("Avant SubBytes : "); afficher_bloc(bloc);
 
     sub_bytes(bloc);

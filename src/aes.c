@@ -77,3 +77,48 @@ void add_round_key(uint8_t *bloc, const uint8_t *round_key) {
         bloc[i] ^= round_key[i];
     }
 }
+static const uint8_t rcon[11] = {
+    0x00, 0x01, 0x02, 0x04, 0x08, 0x10, 0x20, 0x40, 0x80, 0x1b, 0x36
+};
+void key_expansion(const uint8_t *cle, uint8_t *round_keys) {
+    // Les 16 premiers octets = la cle originale, copiee telle quelle
+    for (int i = 0; i < 16; i++) {
+        round_keys[i] = cle[i];
+    }
+
+    uint8_t temp[4];
+    int bytes_generes = 16;
+    int rcon_index = 1;
+
+    while (bytes_generes < 176) {
+        // Recupere les 4 derniers octets generes
+        for (int j = 0; j < 4; j++) {
+            temp[j] = round_keys[bytes_generes - 4 + j];
+        }
+
+        // Cas special : tous les 16 octets (4 mots)
+        if (bytes_generes % 16 == 0) {
+            // RotWord : rotation d'1 position vers la gauche
+            uint8_t t = temp[0];
+            temp[0] = temp[1];
+            temp[1] = temp[2];
+            temp[2] = temp[3];
+            temp[3] = t;
+
+            // SubWord : passage par la S-box
+            for (int j = 0; j < 4; j++) {
+                temp[j] = sbox[temp[j]];
+            }
+
+            // XOR avec Rcon, uniquement sur le premier octet
+            temp[0] ^= rcon[rcon_index];
+            rcon_index++;
+        }
+
+        // Nouveau mot = mot d'il y a 16 octets XOR temp
+        for (int j = 0; j < 4; j++) {
+            round_keys[bytes_generes+j] = round_keys[bytes_generes - 16 + j] ^ temp[j];
+        }
+        bytes_generes += 4;
+    }
+}
