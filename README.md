@@ -18,8 +18,7 @@ AES-128-C/
 │ ├── aes.c # SubBytes, ShiftRows, MixColumns, AddRoundKey,
 |
 │ │ # Key Schedule, chiffrement et dechiffrement.
-│ 
-├── main.c # Tests de validation (vecteur NIST + cycle complet).
+| |── main.c # Tests de validation (vecteur NIST + cycle complet).
 │ ├── chiffrer.c # Programme interactif de chiffrement.
 |
 │ └── dechiffrer.c # Programme interactif de dechiffrement.
