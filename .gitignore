@@ -1,8 +1,10 @@
-# Fichiers compilés
+# Fichiers compiles
 *.o
 *.out
 main
+chiffrer
+dechiffrer
 
-# Fichiers d'éditeur
+# Fichiers d'editeur
 .vscode/
 *.swp
