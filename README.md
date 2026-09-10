@@ -18,8 +18,7 @@ Ce projet a été réalisé pour consolider par la pratique les notions théoriq
 - `chiffrer` : programme interactif demandant un message et une clé, retournant le bloc chiffré
 - `dechiffrer` : programme interactif demandant un chiffré (en hexadécimal) et une clé, retrouvant le message d'origine
 
-## Structure du projet
-src/
+## Structure du projet :src/
 ├── aes.h # Déclarations des fonctions AES
 ├── aes.c # Implémentation : SubBytes, ShiftRows, MixColumns, AddRoundKey,
 │ # Key Schedule, chiffrement et déchiffrement complets
