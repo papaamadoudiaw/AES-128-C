@@ -10,7 +10,7 @@ Université de Versailles Saint-Quentin (Université Paris-Saclay)
 
 ## 📁 Structure du projet
 AES-128-C/
-
+```
 ├── src/
 |
 │ ├── aes.h # Declarations des fonctions AES.
@@ -27,7 +27,7 @@ AES-128-C/
 ├── .gitignore.
 |
 └── README.md.
-
+```
 ## 🚀 Compilation et exécution
 
 ### Tests de validation
