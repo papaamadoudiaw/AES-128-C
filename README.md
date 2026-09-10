@@ -13,20 +13,20 @@ AES-128-C/
 
 ├── src/
 |
-│ ├── aes.h # Declarations des fonctions AES
+│ ├── aes.h # Declarations des fonctions AES.
 |
 │ ├── aes.c # SubBytes, ShiftRows, MixColumns, AddRoundKey,
 |
-│ │ # Key Schedule, chiffrement et dechiffrement
+│ │ # Key Schedule, chiffrement et dechiffrement.
 │ 
-├── main.c # Tests de validation (vecteur NIST + cycle complet)
-│ ├── chiffrer.c # Programme interactif de chiffrement
+├── main.c # Tests de validation (vecteur NIST + cycle complet).
+│ ├── chiffrer.c # Programme interactif de chiffrement.
 |
-│ └── dechiffrer.c # Programme interactif de dechiffrement
+│ └── dechiffrer.c # Programme interactif de dechiffrement.
 |
-├── .gitignore
+├── .gitignore.
 |
-└── README.md
+└── README.md.
 
 ## 🚀 Compilation et exécution
 
