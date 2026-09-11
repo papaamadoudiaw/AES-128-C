@@ -37,6 +37,31 @@ void lire_bloc(const char *invite, uint8_t *bloc) {
         }
     }
 }
+void lire_cle(const char *invite, uint8_t *bloc) {
+    char buffer[100];
+
+    printf("%s", invite);
+    fgets(buffer, sizeof(buffer), stdin);
+
+    size_t len = strlen(buffer);
+    if (len > 0 && buffer[len - 1] == '\n') {
+        buffer[len - 1] = '\0';
+        len--;
+    }
+
+    if (len != TAILLE_BLOC) {
+        printf("Attention : la cle devrait faire exactement 16 caracteres (actuellement %zu).\n", len);
+        printf("Elle sera completee ou tronquee automatiquement.\n");
+    }
+
+    for (int i = 0; i < TAILLE_BLOC; i++) {
+        if (i < (int)len) {
+            bloc[i] = (uint8_t)buffer[i];
+        } else {
+            bloc[i] = 0x00;
+        }
+    }
+}
 
 int main(void) {
     uint8_t message[16];
@@ -45,7 +70,7 @@ int main(void) {
 
     printf("=== Chiffrement AES-128 ===\n");
     lire_bloc("Message a chiffrer (16 caracteres max) : ", message);
-    lire_bloc("Cle (16 caracteres exactement)          : ", cle);
+    lire_cle("Cle (16 caracteres exactement)          : ", cle);
 
     aes128_encrypt(message, cle, chiffre);
 
